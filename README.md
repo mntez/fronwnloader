@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frownloader
 
-## Getting Started
+The repository keeps the frontend and backend in separate top-level folders:
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```text
+frontend/   Next.js website
+backend/    FastAPI service and video processing
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Frontend
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```powershell
+cd frontend
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000). Install JavaScript
+dependencies with `npm install` from `frontend/` if needed. Configure the API
+address in `frontend/.env.local` using `frontend/.env.example` as a guide.
 
-## Learn More
+## Backend
 
-To learn more about Next.js, take a look at the following resources:
+See [backend/README.md](backend/README.md) for Python setup, FFmpeg
+installation, environment settings, and API verification commands. In brief:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```powershell
+cd backend
+.\.venv\Scripts\Activate.ps1
+python -m uvicorn frownloader_api.main:app --reload --host 127.0.0.1 --port 8000 --env-file .env
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The backend requires Python and FFmpeg on `PATH`. Only download content you
+are authorized to save; platform availability and formats vary by source.

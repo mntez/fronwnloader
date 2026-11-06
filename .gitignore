@@ -2,6 +2,12 @@
 
 # dependencies
 /node_modules
+frontend/node_modules/
+backend/.venv/
+backend/**/__pycache__/
+backend/**/*.py[cod]
+/.venv/
+.fdownloader-tmp/
 /.pnp
 .pnp.*
 .yarn/*
@@ -15,6 +21,7 @@
 
 # next.js
 /.next/
+/frontend/.next/
 /out/
 
 # production
@@ -32,6 +39,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+!**/.env.example
 
 # vercel
 .vercel
