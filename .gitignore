@@ -22,6 +22,7 @@ backend/**/*.py[cod]
 # next.js
 /.next/
 /frontend/.next/
+/frontend/out/
 /out/
 
 # production

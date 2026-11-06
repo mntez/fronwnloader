@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { siteConfig } from "../lib/site-config";
 
 const satoshi = localFont({
   src: [
@@ -20,7 +21,7 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Frownloader | Free Online Video Downloader",
+  title: `${siteConfig.name} | Free Online Video Downloader`,
   description: "Paste a video link from YouTube, Facebook, Instagram, or TikTok.",
 };
 

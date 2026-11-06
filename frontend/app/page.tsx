@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState, type ClipboardEvent, type FormEvent } from "react";
+import Policies from "./policies";
+import { siteConfig } from "../lib/site-config";
 
 type VideoFormat = {
   format_id: string | null;
@@ -245,8 +247,8 @@ export default function Home() {
   return (
     <main className="landing-page">
       <header className="topbar">
-        <a className="wordmark" href="#home" aria-label="Frownloader home">
-          FROWNLOADER
+        <a className="wordmark" href="#home" aria-label={`${siteConfig.name} home`}>
+          {siteConfig.name.toUpperCase()}
         </a>
         <nav className="platform-nav" aria-label="Supported platforms">
           {supportedPlatforms.map((platform, index) => (
@@ -464,6 +466,14 @@ export default function Home() {
         </section>
 
       </section>
+      <Policies />
+      <footer className="site-footer">
+        <span>© {new Date().getFullYear()} {siteConfig.name}</span>
+        <nav aria-label="Legal information">
+          <a href="#terms">Terms of Service</a>
+          <a href="#privacy">Privacy Policy</a>
+        </nav>
+      </footer>
     </main>
   );
 }
