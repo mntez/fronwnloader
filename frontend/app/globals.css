@@ -439,12 +439,7 @@ a {
   }
 
   .platform-nav {
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 4px 7px;
-    max-width: 64%;
-    white-space: normal;
-    font-size: 14px;
+    display: none;
   }
 
   .hero {
@@ -512,10 +507,6 @@ a {
 @media (max-width: 390px) {
   .wordmark {
     font-size: 15px;
-  }
-
-  .platform-nav {
-    font-size: 12px;
   }
 
   .download-form input {

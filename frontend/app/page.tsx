@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState, type ClipboardEvent, type FormEvent } from "react";
 
 type VideoFormat = {
   format_id: string | null;
@@ -61,9 +61,8 @@ export default function Home() {
   const [downloadJob, setDownloadJob] = useState<DownloadJob | null>(null);
   const [isStartingDownload, setIsStartingDownload] = useState(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const value = url.trim();
+  async function analyzeLink(rawValue: string) {
+    const value = rawValue.trim();
 
     if (!value) {
       setMessage("Paste a video link to get started.");
@@ -125,6 +124,20 @@ export default function Home() {
     } finally {
       setIsAnalyzing(false);
     }
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await analyzeLink(url);
+  }
+
+  function handlePaste(event: ClipboardEvent<HTMLInputElement>) {
+    const pastedValue = event.clipboardData.getData("text").trim();
+    if (!pastedValue) return;
+
+    event.preventDefault();
+    setUrl(pastedValue);
+    void analyzeLink(pastedValue);
   }
 
   async function handleFormatSelection() {
@@ -250,16 +263,17 @@ export default function Home() {
 
         <form className="download-form" onSubmit={handleSubmit}>
           <label className="visually-hidden" htmlFor="video-url">
-            Video link
+            {selectedPlatform} video link
           </label>
           <input
             id="video-url"
             ref={videoUrlInput}
             type="url"
             inputMode="url"
-            placeholder={`paste your ${selectedPlatform} link here`}
+            placeholder="Paste link"
             value={url}
             disabled={isBusy}
+            onPaste={handlePaste}
             onChange={(event) => {
               setUrl(event.target.value);
               setMessage("");
@@ -415,7 +429,7 @@ export default function Home() {
 
         <section className="platform-picker-section" aria-labelledby="platform-picker-heading">
           <h2 className="platform-picker-heading" id="platform-picker-heading">
-            Choose a platform <span>YouTube is selected by default</span>
+            Choose a platform <span>{selectedPlatform === "YouTube" ? "YouTube is selected by default" : `${selectedPlatform} selected`}</span>
           </h2>
           <div className="platform-choices" id="platforms" role="group" aria-label="Choose a video platform">
             {supportedPlatforms.map((platform) => (
