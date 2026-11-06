@@ -468,7 +468,7 @@ export default function Home() {
       </section>
       <Policies />
       <footer className="site-footer">
-        <span>© {new Date().getFullYear()} {siteConfig.name}</span>
+        <span>© {siteConfig.name}</span>
         <nav aria-label="Legal information">
           <a href="#terms">Terms of Service</a>
           <a href="#privacy">Privacy Policy</a>
